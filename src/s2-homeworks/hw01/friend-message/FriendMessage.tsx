@@ -3,38 +3,38 @@ import s from './FriendMessage.module.css'
 import {MessagePropsType} from "../message/Message";
 
 
-const FriendMessage = (props: MessagePropsType) => {
+export const FriendMessage: React.FC<MessagePropsType> = ({
+  message
+                                                   }) => {
   return (
     <div
-      id={'hw1-friend-message-' + props.message.id}
+      id={'hw1-friend-message-' + message.id}
       className={s.friendMessage}
     >
       <div className={s.friendImageAndText}>
         <img
-          id={'hw1-friend-avatar-' + props.message.id}
-          src={props.message.user.avatar}
+          id={'hw1-friend-avatar-' + message.id}
+          src={message.user.avatar}
         />
         <div className={s.friendText}>
           <div
-            id={'hw1-friend-name-' + props.message.id}
+            id={'hw1-friend-name-' + message.id}
             className={s.friendName}>
-            {props.message.user.name}
+            {message.user.name}
           </div>
           <pre
-            id={'hw1-friend-text-' + props.message.id}
+            id={'hw1-friend-text-' + message.id}
             className={s.friendMessageText}>
-                        {props.message.message.text}
+                        {message.message.text}
                     </pre>
         </div>
       </div>
       <div
-        id={'hw1-friend-time-' + props.message.id}
+        id={'hw1-friend-time-' + message.id}
         className={s.friendTime}
       >
-        {props.message.message.time}
+        {message.message.time}
       </div>
     </div>
   )
 }
-
-export default FriendMessage
