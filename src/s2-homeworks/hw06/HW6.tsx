@@ -19,7 +19,7 @@ const HW6 = () => {
   }
   const restore = () => {
     const defaultState = 'enter text...';
-    const state = restoreState<string>('editable-span-value', defaultState);
+    const state = restoreState<string>('hw6-editable-span-value', defaultState);
     setValue(state);
   }
 
