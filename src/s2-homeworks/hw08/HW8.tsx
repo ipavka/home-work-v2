@@ -46,7 +46,7 @@ const HW8 = () => {
     setCurrentSort('down')
   }
   const check18 = () => {
-    sortDown()
+    sortUp()
     setPeople(
       homeWorkReducer(initialPeople, {type: 'check', payload: 18})
     )
