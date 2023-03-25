@@ -1,8 +1,21 @@
 .container {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 30px;
 }
 
 .wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.wrapper span {
+  max-width: 280px;
 }
 
 .number {
+  font-weight: bold;
+  padding: 0 20px;
 }
