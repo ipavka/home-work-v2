@@ -18,33 +18,32 @@ function HW11() {
   const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
   const change = (event: Event, newValue: number | number[], activeThumb: number) => {
-    if (!Array.isArray(newValue)) {
-      setValue1(newValue);
-      return;
-    }
-
-    if (newValue[1] - newValue[0] < minDistance) {
-      if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 100 - minDistance);
-        setValue1(clamped);
-        setValue2(clamped + minDistance);
-      } else {
-        const clamped = Math.max(newValue[1], minDistance);
-        setValue2(clamped - minDistance);
-        setValue1(clamped);
-      }
-    } else {
-      setValue1(newValue[0] as number);
-      setValue2(newValue[1] as number);
-    }
-
-    // console.log(activeThumb)
-    // if (Array.isArray(newValue)) {
-    //   setValue1(newValue[0]);
-    //   setValue2(newValue[1]);
-    // } else {
+    // if (!Array.isArray(newValue)) {
     //   setValue1(newValue);
+    //   return;
     // }
+    //
+    // if (newValue[1] - newValue[0] < minDistance) {
+    //   if (activeThumb === 0) {
+    //     const clamped = Math.min(newValue[0], 100 - minDistance);
+    //     setValue1(clamped);
+    //     setValue2(clamped + minDistance);
+    //   } else {
+    //     const clamped = Math.max(newValue[1], minDistance);
+    //     setValue2(clamped - minDistance);
+    //     setValue1(clamped);
+    //   }
+    // } else {
+    //   setValue1(newValue[0] as number);
+    //   setValue2(newValue[1] as number);
+    // }
+
+    if (Array.isArray(newValue)) {
+      setValue1(newValue[0]);
+      setValue2(newValue[1]);
+    } else {
+      setValue1(newValue);
+    }
     // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
   }
 
