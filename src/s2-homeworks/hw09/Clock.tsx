@@ -10,46 +10,34 @@ function Clock() {
   const [show, setShow] = useState<boolean>(false)
 
   const start = () => {
-    // пишут студенты // запустить часы (должно отображаться реальное время, а не +1)
-    // сохранить ид таймера (https://learn.javascript.ru/settimeout-setinterval#setinterval)
-    // stop()
     setShow(true);
     const id: number = window.setInterval(() => {
       setDate(new Date())
     }, 1000)
     setTimerId(id)
-
   }
 
   const stop = () => {
     setShow(false);
     clearInterval(timerId);
     setTimerId(undefined);
-    // пишут студенты // поставить часы на паузу, обнулить ид таймера (timerId <- undefined)
-
   }
 
-  const onMouseEnter = () => { // пишут студенты // показать дату если наведена мышка
+  const onMouseEnter = () => {
     setShow(true);
   }
-  const onMouseLeave = () => { // пишут студенты // спрятать дату если мышка не наведена
+  const onMouseLeave = () => {
     setShow(false);
   }
 
-  const stringTime = `${date.toLocaleTimeString('ru-Ru')}` || <br/> // часы24:минуты:секунды (01:02:03)/(23:02:03)/(24:00:00)/(00:00:01) // пишут студенты
-  const stringDate = `${date.toLocaleDateString('ru-Ru')}` || <br/> // день.месяц.год (01.02.2022) // пишут студенты, варианты 01.02.0123/01.02.-123/01.02.12345 не рассматриваем
+  const stringTime = `${date.toLocaleTimeString('ru-Ru')}` || <br/>
+  const stringDate = `${date.toLocaleDateString('ru-Ru')}` || <br/>
 
   let weekday = new Intl.DateTimeFormat("en-US", {weekday: "long"});
   let month = new Intl.DateTimeFormat("en-US", {month: "long"});
   // день недели на английском, месяц на английском (https://learn.javascript.ru/intl#intl-datetimeformat)
-  const stringDay = weekday.format(date) || <br/> // пишут студенты
-  const stringMonth = month.format(date) || <br/> // пишут студенты
-
-
-  // const stringTime = `${date ? date.toLocaleTimeString() : 'press start'}`
-  // const stringDate = `${date ? date.toLocaleDateString() : 'press start'}`
-  // const clickedStart = `${clicked === 'start' ? s.buttonOn : ''}`
-  // const clickedStop = `${clicked === 'stop' ? s.buttonOn : ''}`
+  const stringDay = weekday.format(date) || <br/>
+  const stringMonth = month.format(date) || <br/>
 
   return (
     <div className={s.clock}>
@@ -83,14 +71,14 @@ function Clock() {
       <div className={s.buttonsContainer}>
         <SuperButton
           id={'hw9-button-start'}
-          disabled={!!timerId} // пишут студенты // задизэйблить если таймер запущен
+          disabled={!!timerId}
           onClick={start}
         >
           start
         </SuperButton>
         <SuperButton
           id={'hw9-button-stop'}
-          disabled={!timerId} // пишут студенты // задизэйблить если таймер не запущен
+          disabled={!timerId}
           onClick={stop}
         >
           stop
