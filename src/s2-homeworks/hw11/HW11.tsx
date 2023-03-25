@@ -17,7 +17,7 @@ function HW11() {
   const [value1, setValue1] = useState(restoreState<number>('hw11-value1', 0))
   const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
-  const change = (event: Event, newValue: number | number[], activeThumb: number) => {
+  const change = (event: Event, value: number | number[]) => {
     // if (!Array.isArray(newValue)) {
     //   setValue1(newValue);
     //   return;
@@ -38,11 +38,11 @@ function HW11() {
     //   setValue2(newValue[1] as number);
     // }
 
-    if (Array.isArray(newValue)) {
-      setValue1(newValue[0]);
-      setValue2(newValue[1]);
+    if (Array.isArray(value)) {
+      setValue1(value[0]);
+      setValue2(value[1]);
     } else {
-      setValue1(newValue);
+      setValue1(value);
     }
     // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
   }
@@ -59,7 +59,7 @@ function HW11() {
               id={'hw11-single-slider'}
               value={value1}
               onChange={change}
-              valueLabelDisplay="auto"
+              // valueLabelDisplay="auto"
               // сделать так чтоб value1 изменялось // пишет студент
 
             />
@@ -70,8 +70,8 @@ function HW11() {
               id={'hw11-double-slider'}
               value={[value1, value2]}
               onChange={change}
-              getAriaLabel={() => 'double-slider'}
-              valueLabelDisplay="auto"
+              // getAriaLabel={() => 'double-slider'}
+              // valueLabelDisplay="auto"
               // сделать так чтоб value1/2 изменялось // пишет студент
 
             />
