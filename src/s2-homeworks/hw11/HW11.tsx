@@ -18,26 +18,6 @@ function HW11() {
   const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
   const change = (event: Event, value: number | number[], activeThumb: number) => {
-    // if (!Array.isArray(value)) {
-    //   setValue1(value);
-    //   return;
-    // }
-    //
-    // if (value[1] - value[0] < minDistance) {
-    //   if (activeThumb === 0) {
-    //     const clamped = Math.min(value[0], 100 - minDistance);
-    //     setValue1(clamped);
-    //     setValue2(clamped + minDistance);
-    //   } else {
-    //     const clamped = Math.max(value[1], minDistance);
-    //     setValue2(clamped - minDistance);
-    //     setValue1(clamped);
-    //   }
-    // } else {
-    //   setValue1(value[0] as number);
-    //   setValue2(value[1] as number);
-    // }
-
     if (Array.isArray(value)) {
       if (value[1] - value[0] < minDistance) {
         if (activeThumb === 0) {
@@ -72,8 +52,6 @@ function HW11() {
               value={value1}
               onChange={change}
               valueLabelDisplay="auto"
-              // сделать так чтоб value1 изменялось // пишет студент
-
             />
           </div>
           <div className={s.wrapper}>
@@ -82,10 +60,7 @@ function HW11() {
               id={'hw11-double-slider'}
               value={[value1, value2]}
               onChange={change}
-              // getAriaLabel={() => 'double-slider'}
               valueLabelDisplay="auto"
-              // сделать так чтоб value1/2 изменялось // пишет студент
-
             />
             <span id={'hw11-value-2'} className={s.number}>{value2}</span>
           </div>
