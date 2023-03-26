@@ -41,9 +41,9 @@ function HW11() {
     if (Array.isArray(value)) {
       setValue1(value[0]);
       setValue2(value[1]);
-    } else {
-      setValue1(value);
-    }
+    } else if (Number.isInteger(value)) {
+      setValue1(value as number);
+    } else return;
     // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
   }
 
