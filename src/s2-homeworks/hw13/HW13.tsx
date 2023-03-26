@@ -15,100 +15,118 @@ import errorUnknown from './images/error.svg'
 * */
 
 const HW13 = () => {
-    const [code, setCode] = useState('')
-    const [text, setText] = useState('')
-    const [info, setInfo] = useState('')
-    const [image, setImage] = useState('')
+  const [code, setCode] = useState('')
+  const [text, setText] = useState('')
+  const [info, setInfo] = useState('')
+  const [image, setImage] = useState('')
 
-    const send = (x?: boolean | null) => () => {
-        const url =
-            x === null
-                ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
-                : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
+  const send = (x?: boolean | null) => () => {
+    const url =
+      x === null
+        ? 'https://xxxxxx.ccc' // имитация запроса на не корректный адрес
+        : 'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test'
 
-        setCode('')
-        setImage('')
-        setText('')
-        setInfo('...loading')
+    setCode('')
+    setImage('')
+    setText('')
+    setInfo('...loading')
 
-        axios
-            .post(url, {success: x})
-            .then((res) => {
-                setCode('Код 200!')
-                setImage(success200)
-                // дописать
+    axios
+      .post(url, {success: x})
+      .then((res) => {
+        const {errorText, info} = res.data
+        setCode('Код 200!')
+        setImage(success200)
+        setText(errorText)
+        setInfo(info)
+      })
+      .catch((e) => {
+        try {
+          const {errorText, info} = e.response.data
+          if (e.response.status === 500) {
+            setCode('Ошибка 500!')
+            setImage(error500)
+            setText(errorText)
+            setInfo(info)
+          }
+          if (e.response.status === 400) {
+            setCode('Ошибка 400!')
+            setImage(error400)
+            setText(errorText)
+            setInfo(info)
+          }
+        } catch (e) {
+          setCode('Error!')
+          setImage(errorUnknown)
+          setText('Network Error')
+          setInfo('AxiosError')
+        }
+      })
+  }
 
-            })
-            .catch((e) => {
-                // дописать
+  return (
+    <div id={'hw13'}>
+      <div className={s2.hwTitle}>Homework #13</div>
 
-            })
-    }
+      <div className={s2.hw}>
+        <div className={s.buttonsContainer}>
 
-    return (
-        <div id={'hw13'}>
-            <div className={s2.hwTitle}>Homework #13</div>
+          <SuperButton
+            id={'hw13-send-true'}
+            onClick={send(true)}
+            xType={'secondary'}
+            disabled={info === '...loading'}>
+            Send true
+          </SuperButton>
 
-            <div className={s2.hw}>
-                <div className={s.buttonsContainer}>
-                    <SuperButton
-                        id={'hw13-send-true'}
-                        onClick={send(true)}
-                        xType={'secondary'}
-                        // дописать
+          <SuperButton
+            id={'hw13-send-false'}
+            onClick={send(false)}
+            xType={'secondary'}
+            disabled={info === '...loading'}>
+            Send false
+          </SuperButton>
 
-                    >
-                        Send true
-                    </SuperButton>
-                    <SuperButton
-                        id={'hw13-send-false'}
-                        onClick={send(false)}
-                        xType={'secondary'}
-                        // дописать
+          <SuperButton
+            id={'hw13-send-undefined'}
+            onClick={send(undefined)}
+            xType={'secondary'}
+            disabled={info === '...loading'}>
+            Send undefined
+          </SuperButton>
 
-                    >
-                        Send false
-                    </SuperButton>
-                    <SuperButton
-                        id={'hw13-send-undefined'}
-                        onClick={send(undefined)}
-                        xType={'secondary'}
-                        // дописать
+          <SuperButton
+            id={'hw13-send-null'}
+            onClick={send(null)} // имитация запроса на не корректный адрес
+            xType={'secondary'}
+            disabled={info === '...loading'}>
+            Send null
+          </SuperButton>
 
-                    >
-                        Send undefined
-                    </SuperButton>
-                    <SuperButton
-                        id={'hw13-send-null'}
-                        onClick={send(null)} // имитация запроса на не корректный адрес
-                        xType={'secondary'}
-                        // дописать
-
-                    >
-                        Send null
-                    </SuperButton>
-                </div>
-
-                <div className={s.responseContainer}>
-                    <div className={s.imageContainer}>
-                        {image && <img src={image} className={s.image} alt="status"/>}
-                    </div>
-
-                    <div className={s.textContainer}>
-                        <div id={'hw13-code'} className={s.code}>
-                            {code}
-                        </div>
-                        <div id={'hw13-text'} className={s.text}>
-                            {text}
-                        </div>
-                        <div id={'hw13-info'} className={s.info}>
-                            {info}
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-    )
+        {info &&
+          <div className={s.responseContainer}>
+
+            <div className={s.textContainer}>
+              <div id={'hw13-code'} className={s.code}>
+                {code}
+              </div>
+              <div id={'hw13-text'} className={s.text}>
+                {text}
+              </div>
+              <div id={'hw13-info'} className={s.info}>
+                {info}
+              </div>
+            </div>
+
+            <div className={s.imageContainer}>
+              {image && <img src={image} className={s.image} alt="status"/>}
+            </div>
+
+          </div>}
+      </div>
+    </div>
+  )
 }
 
 export default HW13

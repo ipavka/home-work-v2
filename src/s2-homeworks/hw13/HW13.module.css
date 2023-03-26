@@ -5,18 +5,31 @@
 }
 
 .imageContainer {
+  display: flex;
+  justify-content: center;
 }
 
 .image {
 }
 
-.textContainer{
+.textContainer {
+  min-width: 200px;
+  max-width: 500px;
+  font-size: 20px;
+  font-weight: 500;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  padding: 10px;
+  margin: 20px;
 }
 
 .code {
+  font-weight: bold;
 }
 
 .text {
 }
+
 .info {
 }
