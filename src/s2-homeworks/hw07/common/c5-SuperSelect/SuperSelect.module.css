@@ -1,4 +1,11 @@
 .select {
+  height: 35px;
+  min-width: 100px;
+  text-align: center;
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid #C2C2C2;
+  cursor: pointer;
 }
 
 .select:focus {
