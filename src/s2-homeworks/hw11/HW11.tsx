@@ -17,34 +17,46 @@ function HW11() {
   const [value1, setValue1] = useState(restoreState<number>('hw11-value1', 0))
   const [value2, setValue2] = useState(restoreState<number>('hw11-value2', 100))
 
-  const change = (event: Event, value: number | number[]) => {
-    // if (!Array.isArray(newValue)) {
-    //   setValue1(newValue);
+  const change = (event: Event, value: number | number[], activeThumb: number) => {
+    // if (!Array.isArray(value)) {
+    //   setValue1(value);
     //   return;
     // }
     //
-    // if (newValue[1] - newValue[0] < minDistance) {
+    // if (value[1] - value[0] < minDistance) {
     //   if (activeThumb === 0) {
-    //     const clamped = Math.min(newValue[0], 100 - minDistance);
+    //     const clamped = Math.min(value[0], 100 - minDistance);
     //     setValue1(clamped);
     //     setValue2(clamped + minDistance);
     //   } else {
-    //     const clamped = Math.max(newValue[1], minDistance);
+    //     const clamped = Math.max(value[1], minDistance);
     //     setValue2(clamped - minDistance);
     //     setValue1(clamped);
     //   }
     // } else {
-    //   setValue1(newValue[0] as number);
-    //   setValue2(newValue[1] as number);
+    //   setValue1(value[0] as number);
+    //   setValue2(value[1] as number);
     // }
 
     if (Array.isArray(value)) {
-      setValue1(value[0]);
-      setValue2(value[1]);
-    } else if (Number.isInteger(value)) {
+      if (value[1] - value[0] < minDistance) {
+        if (activeThumb === 0) {
+          const clamped = Math.min(value[0], 100 - minDistance);
+          setValue1(clamped);
+          setValue2(clamped + minDistance);
+        } else {
+          const clamped = Math.max(value[1], minDistance);
+          setValue2(clamped - minDistance);
+          setValue1(clamped);
+        }
+      } else {
+        setValue1(value[0]);
+        setValue2(value[1]);
+      }
+    }
+    if (Number.isInteger(value)) {
       setValue1(value as number);
-    } else return;
-    // пишет студент // если пришёл массив - сохранить значения в оба useState, иначе в первый
+    }
   }
 
   return (
@@ -59,7 +71,7 @@ function HW11() {
               id={'hw11-single-slider'}
               value={value1}
               onChange={change}
-              // valueLabelDisplay="auto"
+              valueLabelDisplay="auto"
               // сделать так чтоб value1 изменялось // пишет студент
 
             />
@@ -71,7 +83,7 @@ function HW11() {
               value={[value1, value2]}
               onChange={change}
               // getAriaLabel={() => 'double-slider'}
-              // valueLabelDisplay="auto"
+              valueLabelDisplay="auto"
               // сделать так чтоб value1/2 изменялось // пишет студент
 
             />
