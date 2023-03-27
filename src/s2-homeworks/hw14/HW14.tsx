@@ -14,76 +14,83 @@ import {useSearchParams} from 'react-router-dom'
 * */
 
 const getTechs = (find: string) => {
-    return axios
-        .get<{ techs: string[] }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test2',
-            {params: {find}}
-        )
-        .catch((e) => {
-            alert(e.response?.data?.errorText || e.message)
-        })
+  return axios
+    .get<{ techs: string[] }>(
+      'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test2',
+      {params: {find}}
+    )
+    .catch((e) => {
+      alert(e.response?.data?.errorText || e.message)
+    })
 }
 
 const HW14 = () => {
-    const [find, setFind] = useState('')
-    const [isLoading, setLoading] = useState(false)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const [techs, setTechs] = useState<string[]>([])
+  const [find, setFind] = useState('')
+  const [isLoading, setLoading] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [techs, setTechs] = useState<string[]>([])
 
-    const sendQuery = (value: string) => {
-        setLoading(true)
-        getTechs(value)
-            .then((res) => {
-                // делает студент
-
-                // сохранить пришедшие данные
-
-                //
-            })
-    }
-
-    const onChangeText = (value: string) => {
-        setFind(value)
+  const sendQuery = (value: string) => {
+    setLoading(true)
+    getTechs(value)
+      .then((res) => {
+        if (res?.data) {
+          setTechs(res.data.techs)
+        }
+        // console.log(res?.data.techs)
         // делает студент
+        // сохранить пришедшие данные
+      }).finally(() => setLoading(false))
+  }
 
-        // добавить/заменить значение в квери урла
-        // setSearchParams(
+  const onChangeText = (value: string) => {
+    setFind(value)
+    // console.log(value)
+    // делает студент
 
-        //
+    // добавить/заменить значение в квери урла
+    if (value) {
+      // console.log('if')
+      setSearchParams({find: value});
+      // setSearchParams(value);
+    } else {
+      // console.log('else')
+      setSearchParams({})
     }
+  }
 
-    useEffect(() => {
-        const params = Object.fromEntries(searchParams)
-        sendQuery(params.find || '')
-        setFind(params.find || '')
-    }, [])
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams)
+    console.log(params.find)
+    sendQuery(params.find || '')
+    setFind(params.find || '')
+  }, [])
 
-    const mappedTechs = techs.map(t => (
-        <div key={t} id={'hw14-tech-' + t} className={s.tech}>
-            {t}
+  const mappedTechs = techs.map(t => (
+    <div key={t} id={'hw14-tech-' + t} className={s.tech}>
+      {t}
+    </div>
+  ))
+
+  return (
+    <div id={'hw14'}>
+      <div className={s2.hwTitle}>Homework #14</div>
+
+      <div className={s2.hw}>
+        <SuperDebouncedInput
+          id={'hw14-super-debounced-input'}
+          value={find}
+          onChangeText={onChangeText}
+          onDebouncedChange={sendQuery}/>
+
+        <div id={'hw14-loading'} className={s.loading}>
+          {isLoading ? '...ищем' : <br/>}
         </div>
-    ))
 
-    return (
-        <div id={'hw14'}>
-            <div className={s2.hwTitle}>Homework #14</div>
-
-            <div className={s2.hw}>
-                <SuperDebouncedInput
-                    id={'hw14-super-debounced-input'}
-                    value={find}
-                    onChangeText={onChangeText}
-                    onDebouncedChange={sendQuery}
-                />
-
-                <div id={'hw14-loading'} className={s.loading}>
-                    {isLoading ? '...ищем' : <br/>}
-                </div>
-
-                {mappedTechs}
-            </div>
-        </div>
-    )
+        {mappedTechs}
+      </div>
+    </div>
+  )
 }
 
 export default HW14
