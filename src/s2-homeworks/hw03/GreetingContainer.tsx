@@ -1,11 +1,11 @@
-import React, {ChangeEvent, Dispatch, KeyboardEvent, useState} from 'react'
-import Greeting from './Greeting'
-import {UserType} from './HW3'
+import React, { ChangeEvent, Dispatch, KeyboardEvent, useState } from 'react';
+import Greeting from './Greeting';
+import { UserType } from './HW3';
 
 type GreetingContainerPropsType = {
-  users: UserType[]
-  addUserCallback: (name: string) => void
-}
+  users: UserType[];
+  addUserCallback: (name: string) => void;
+};
 
 export const pureAddUser = (
   name: string,
@@ -19,43 +19,39 @@ export const pureAddUser = (
     addUserCallback(name);
     setName('');
   }
-}
+};
 
 export const pureOnBlur = (name: string, setError: Dispatch<string>) => {
   if (!name.trim()) setError('Ошибка! Введите имя!');
-}
+};
 
 export const pureOnEnter = (e: KeyboardEvent<HTMLInputElement>, addUser: Function) => {
   if (e.key === 'Enter') addUser();
-}
+};
 
-const GreetingContainer: React.FC<GreetingContainerPropsType> = ({
-                                                                   users,
-                                                                   addUserCallback,
-                                                                 }) => {
-
-  const [name, setName] = useState<string>('')
-  const [error, setError] = useState<string>('')
+const GreetingContainer: React.FC<GreetingContainerPropsType> = ({ users, addUserCallback }) => {
+  const [name, setName] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const setNameCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value)
+    setName(e.currentTarget.value);
 
-    error && setError('')
-  }
+    error && setError('');
+  };
   const addUser = () => {
-    pureAddUser(name, setError, setName, addUserCallback)
-  }
+    pureAddUser(name, setError, setName, addUserCallback);
+  };
 
   const onBlur = () => {
-    pureOnBlur(name, setError)
-  }
+    pureOnBlur(name, setError);
+  };
 
   const onEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    pureOnEnter(e, addUser)
-  }
+    pureOnEnter(e, addUser);
+  };
 
-  const totalUsers = users.length
-  const lastUserName = users[0]?.name
+  const totalUsers = users.length;
+  const lastUserName = users[0]?.name;
 
   return (
     <Greeting
@@ -68,7 +64,7 @@ const GreetingContainer: React.FC<GreetingContainerPropsType> = ({
       totalUsers={totalUsers}
       lastUserName={lastUserName}
     />
-  )
-}
+  );
+};
 
-export default GreetingContainer
+export default GreetingContainer;

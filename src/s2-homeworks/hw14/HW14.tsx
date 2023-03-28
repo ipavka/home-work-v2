@@ -1,96 +1,92 @@
-import React, {useEffect, useState} from 'react'
-import s2 from '../../s1-main/App.module.css'
-import s from './HW14.module.css'
-import axios from 'axios'
-import SuperDebouncedInput from './common/c8-SuperDebouncedInput/SuperDebouncedInput'
-import {useSearchParams} from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import s2 from '../../s1-main/App.module.css';
+import s from './HW14.module.css';
+import axios from 'axios';
+import SuperDebouncedInput from './common/c8-SuperDebouncedInput/SuperDebouncedInput';
+import { useSearchParams } from 'react-router-dom';
 
 /*
-* 1 - дописать функцию onChangeTextCallback в SuperDebouncedInput
-* 2 - дописать функцию sendQuery в HW14
-* 3 - дописать функцию onChangeText в HW14
-* 4 - сделать стили в соответствии с дизайном
-* 5 - добавить HW14 в HW5/pages/JuniorPlus
-* */
+ * 1 - дописать функцию onChangeTextCallback в SuperDebouncedInput
+ * 2 - дописать функцию sendQuery в HW14
+ * 3 - дописать функцию onChangeText в HW14
+ * 4 - сделать стили в соответствии с дизайном
+ * 5 - добавить HW14 в HW5/pages/JuniorPlus
+ * */
 
 const getTechs = (find: string) => {
   return axios
     .get<{ techs: string[] }>(
       'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test2',
-      {params: {find}}
+      { params: { find } }
     )
-    .catch((e) => {
-      alert(e.response?.data?.errorText || e.message)
-    })
-}
+    .catch(e => {
+      alert(e.response?.data?.errorText || e.message);
+    });
+};
 
 const HW14 = () => {
-  const [find, setFind] = useState('')
-  const [isLoading, setLoading] = useState(false)
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [techs, setTechs] = useState<string[]>([])
+  const [find, setFind] = useState('');
+  const [isLoading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [techs, setTechs] = useState<string[]>([]);
 
   const sendQuery = (value: string) => {
-    setLoading(true)
+    setLoading(true);
     getTechs(value)
-      .then((res) => {
+      .then(res => {
         if (res?.data) {
-          setTechs(res.data.techs)
+          setTechs(res.data.techs);
         }
-        // console.log(res?.data.techs)
-        // делает студент
-        // сохранить пришедшие данные
-      }).finally(() => setLoading(false))
-  }
+      })
+      .finally(() => setLoading(false));
+  };
 
   const onChangeText = (value: string) => {
-    setFind(value)
-    // console.log(value)
-    // делает студент
-
-    // добавить/заменить значение в квери урла
+    setFind(value);
     if (value) {
-      // console.log('if')
-      setSearchParams({find: value});
-      // setSearchParams(value);
+      setSearchParams({ find: value });
     } else {
-      // console.log('else')
-      setSearchParams({})
+      setSearchParams({});
     }
-  }
+  };
 
   useEffect(() => {
-    const params = Object.fromEntries(searchParams)
-    console.log(params.find)
-    sendQuery(params.find || '')
-    setFind(params.find || '')
-  }, [])
+    const params = Object.fromEntries(searchParams);
+    sendQuery(params.find || '');
+    setFind(params.find || '');
+    return () => {
+      setFind('');
+      searchParams.delete('find');
+    };
+  }, []);
 
   const mappedTechs = techs.map(t => (
     <div key={t} id={'hw14-tech-' + t} className={s.tech}>
       {t}
     </div>
-  ))
+  ));
 
   return (
     <div id={'hw14'}>
       <div className={s2.hwTitle}>Homework #14</div>
 
-      <div className={s2.hw}>
+      <div className={s.hw14Wrapper}>
         <SuperDebouncedInput
           id={'hw14-super-debounced-input'}
           value={find}
           onChangeText={onChangeText}
-          onDebouncedChange={sendQuery}/>
+          onDebouncedChange={sendQuery}
+        />
+        <div className={s.textBlock}>
+          <div id={'hw14-loading'} className={s.loading}>
+            {isLoading ? '...ищем' : <br />}
+          </div>
 
-        <div id={'hw14-loading'} className={s.loading}>
-          {isLoading ? '...ищем' : <br/>}
+          {mappedTechs.length === 0 && !isLoading ? 'nothing...' : mappedTechs}
         </div>
-
-        {mappedTechs}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HW14
+export default HW14;

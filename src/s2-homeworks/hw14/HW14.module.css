@@ -1,7 +1,19 @@
+.hw14Wrapper {
+  min-height: 300px;
+  font-size: large;
+  font-weight: 500;
+
+}
+
+.textBlock {
+
+}
+
 .tech {
 
 }
 
 .loading {
-
+  display: flex;
+  justify-content: flex-end;
 }
