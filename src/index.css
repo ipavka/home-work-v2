@@ -1,46 +1,47 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
-    'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  background: var(--main-gradient);
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
 }
 
 :root {
-/* Color */
---color-heading: #FCFCFC;
-    --color-heading-1: #001e2b;
-    --color-paragraph-1: #42494f;
-    --color-link-underline: #21268F;
-    --color-bg-1: #847bc4;
-    --color-bg-2: #f6f6f6;
-    --color-surface-1:  #EBE0E9;
-    --color-surface-2:  #DCCCDB;
-    --main-gradient: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
-/* ProgressBar */
---background-1: #fff;
-    --background-2: #f1f1f1;
-    --background-3: #a28089;
-    --background-4: #1a268a;
-    --background-5: #ffa8b6;
-    --background-6: #d0bdf4;
-    --background-7: #494d5f;
-    --box-shadow-1: 0 0 5px rgba(0, 0, 0, .2);
-    --box-shadow-2: inset 0 0 5px rgba(0, 0, 0, .2);
+  /* Color */
+  --color-heading: #FCFCFC;
+  --color-heading-1: #001e2b;
+  --color-paragraph-1: #42494f;
+  --color-link-underline: #21268F;
+  --color-bg-1: #847bc4;
+  --color-bg-2: #f6f6f6;
+  --color-surface-1: #EBE0E9;
+  --color-surface-2: #ca82e2;
+  --main-gradient: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
+  /* ProgressBar */
+  --background-1: #fff;
+  --background-2: #bc7bba;
+  --background-3: #a28089;
+  --background-4: #1a268a;
+  --background-5: #ffa8b6;
+  --background-6: #d0bdf4;
+  --background-7: #494d5f;
+  --box-shadow-1: 0 0 5px rgba(0, 0, 0, .2);
+  --box-shadow-2: inset 0 0 5px rgba(0, 0, 0, .2);
 
-/* Shadow */
---box-shadow-10: 0 0 10px #9f9f9f;
+  /* Shadow */
+  --box-shadow-10: 0 0 10px #9f9f9f;
 }
