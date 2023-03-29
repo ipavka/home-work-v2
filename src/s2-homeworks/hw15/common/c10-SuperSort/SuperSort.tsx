@@ -16,22 +16,22 @@ export type SuperSortPropsType = {
 };
 
 export const pureChange = (sort: string, down: string, up: string) => {
-  // проходит тесты
-  if (sort[0] === down[0] && sort[1] !== down[1]) {
-    return down;
-  } else if (sort[0] === '0') {
-    return '';
-  } else if (sort[0] === '1') {
-    return up;
-  } else return down;
-
+  // // проходит тесты
   // if (sort[0] === down[0] && sort[1] !== down[1]) {
-  //   return up;
+  //   return down;
   // } else if (sort[0] === '0') {
-  //   return down; // ''
-  // } else if (sort[0] === '1') {
   //   return '';
-  // } else return up;
+  // } else if (sort[0] === '1') {
+  //   return up;
+  // } else return down;
+
+  if (sort[0] === down[0] && sort[1] !== down[1]) {
+    return up;
+  } else if (sort[0] === '0') {
+    return down; // ''
+  } else if (sort[0] === '1') {
+    return '';
+  } else return up;
 
   // // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
   // return up; // исправить
