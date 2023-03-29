@@ -25,19 +25,33 @@ export const pureChange = (sort: string, down: string, up: string) => {
   //   return up;
   // } else return down;
 
-  if (sort[0] === down[0] && sort[1] !== down[1]) {
+  if (!sort) {
     console.log('1_return');
     return down;
-  } else if (sort[0] === '0') {
+  } else if (sort === down) {
     console.log('2_return');
-    return '';
-  } else if (sort[0] === '1') {
-    console.log('3_return');
     return up;
+  } else if (sort === up) {
+    console.log('3_return');
+    return '';
   } else {
     console.log('4_return');
     return down;
   }
+
+  // if (sort[0] === down[0] && sort[1] !== down[1]) {
+  //   console.log('1_return');
+  //   return down;
+  // } else if (sort[0] === '0') {
+  //   console.log('2_return');
+  //   return '';
+  // } else if (sort[0] === '1') {
+  //   console.log('3_return');
+  //   return up;
+  // } else {
+  //   console.log('4_return');
+  //   return down;
+  // }
 
   // // пишет студент, sort: (click) => down (click) => up (click) => '' (click) => down ...
   // return up; // исправить
@@ -56,7 +70,7 @@ const SuperSort: React.FC<SuperSortPropsType> = ({ sort, value, onChange, id = '
 
   return (
     <span id={id + '-sort-' + value} onClick={onChangeCallback}>
-      <img id={id + '-icon-' + sort} src={icon} />
+      <img id={id + '-icon-' + sort} src={icon} alt="sort-logo" />
     </span>
   );
 };
