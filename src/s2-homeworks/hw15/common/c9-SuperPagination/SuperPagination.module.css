@@ -1,5 +1,17 @@
-.pagination {
+.pagination,
+.textWrapper,
+.text1,
+.text2 {
   display: flex;
+  align-items: center;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.textWrapper {
+  margin: 10px 0;
 }
 
 .text1 {

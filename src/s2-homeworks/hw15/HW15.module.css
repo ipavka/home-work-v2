@@ -1,38 +1,50 @@
-.tech {
-  width: 50vw;
-}
-
-.developer {
-
-}
-
-.techHeader {
-  width: 50vw;
-}
-
-.techHeader img {
-  width: 20px;
-  /*height: 6px;*/
-}
-
-.developerHeader {
-
-}
-
-.developerHeader img {
-  width: 20px;
-  /*height: 6px;*/
-}
-
+.rowHeader,
+.techHeader,
+.developerHeader,
 .row {
   display: flex;
 }
 
+.tech,
+.techHeader {
+  width: 50vw;
+}
+
+.hw15Wrapper {
+  opacity: 0.4;
+}
+
+.spinnerStyle {
+  position: absolute;
+  z-index: 1;
+  margin: 11% 30%;
+}
+
 .rowHeader {
-  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.rowHeader img {
+  width: 20px;
+  height: 25px;
+}
+
+.techHeader {
+}
+
+.developer {
+}
+
+.developerHeader {
+}
+
+.row {
 }
 
 .loading {
-
 }
 
