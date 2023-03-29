@@ -70,7 +70,7 @@ const HW15 = () => {
     // делает студент
     setPage(newPage);
     setCount(newCount);
-    sendQuery({ sort: '', page: newPage, count: newCount });
+    sendQuery({ sort: sort, page: newPage, count: newCount });
     setSearchParams({ page: String(newPage), count: String(newCount) });
     //
   };
@@ -79,7 +79,7 @@ const HW15 = () => {
     // делает студент
     setSort(newSort);
     setPage(1); // при сортировке сбрасывать на 1 страницу
-    sendQuery({ sort: newSort });
+    sendQuery({ sort: newSort, page: page, count: count });
     setSearchParams({ page: String(page), count: String(count) });
     //
   };
