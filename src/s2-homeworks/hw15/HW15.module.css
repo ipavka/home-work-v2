@@ -1,7 +1,8 @@
 .rowHeader,
 .techHeader,
 .developerHeader,
-.row {
+.row,
+.spinnerStyle {
   display: flex;
 }
 
@@ -10,14 +11,21 @@
   width: 50vw;
 }
 
-.hw15Wrapper {
+.opacity {
   opacity: 0.4;
+}
+
+.hw15Wrapper {
+  position: relative;
 }
 
 .spinnerStyle {
   position: absolute;
-  z-index: 1;
-  margin: 11% 30%;
+  left: 0;
+  right: 0;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .rowHeader {
@@ -47,4 +55,3 @@
 
 .loading {
 }
-
